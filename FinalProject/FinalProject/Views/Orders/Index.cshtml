@@ -1,0 +1,39 @@
+﻿@model IEnumerable<FinalProject.Models.Order>
+
+<h2>Orders</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Service</th>
+            @if (ViewData["UserRole"]?.ToString() == "ServiceProvider")
+            {
+                <th>User</th>
+            }
+            <th>Created Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var order in Model)
+        {
+            <tr>
+                <td>@order.Service.Name</td>
+                @if (ViewData["UserRole"]?.ToString() == "ServiceProvider")
+                {
+                    <td>@order.User.UserName</td> <!-- Only show user when role is ServiceProvider -->
+                }
+                <td>@order.CreatedDate.ToString("g")</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@order.Id" class="btn btn-info">Details</a>
+                    <a asp-action="Delete" asp-route-id="@order.Id" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<p>
+    <a asp-controller="Categories" asp-action="Details" asp-route-id="@ViewBag.CategoryId" class="btn btn-secondary">Back to list</a>
+
+</p>

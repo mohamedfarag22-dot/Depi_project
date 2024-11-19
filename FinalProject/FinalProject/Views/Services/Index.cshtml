@@ -1,0 +1,33 @@
+﻿@model IEnumerable<FinalProject.Models.Service>
+
+<h2>Services</h2>
+
+<p>
+    <a asp-action="Create">Create New Service</a>
+</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var service in Model)
+        {
+            <tr>
+                <td>@service.Name</td>
+                <td>@service.Description</td>
+                <td>@service.Price</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@service.Id">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@service.Id">Delete</a> |
+                    <a asp-action="Details" asp-route-id="@service.Id">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

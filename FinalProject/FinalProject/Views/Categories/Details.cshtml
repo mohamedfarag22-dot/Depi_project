@@ -1,0 +1,39 @@
+﻿@model FinalProject.ViewModel.CategoryDetailsViewModel
+
+@{
+    ViewData["Title"] = "Category Details";
+}
+
+<div class="Services py-5 text-center" id="ser">
+    <div class="text py-5">
+        <h1>@Model.Category.Name <span>Details</span></h1>
+    </div>
+    <div class="container">
+        <div class="card mx-auto" style="width: 18rem;">
+            <img src="~/images/@Model.Category.Image" alt="@Model.Category.Name" class="card-img-top" />
+            <div class="card-body">
+                <h2 class="card-title text-capitalize">@Model.Category.Name</h2>
+                <p class="card-text">@Model.Category.Description</p>
+            </div>
+        </div>
+
+        <h3 class="mt-5">Services</h3>
+        <div class="row mt-4">
+            @foreach (var service in Model.Services)
+            {
+            <div class="col-lg-4 col-md-6">
+                <div class="card" style="width: 18rem;">
+                    <img src="~/images/@service.Image" alt="@service.Name" class="card-img-top" />
+                    <div class="card-body">
+                        <h2 class="card-title text-capitalize">@service.Name</h2>
+                        <p class="card-text">@service.Description</p>
+                        <a href="#" class="btn text-capitalize">book a service</a>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+
+        <a asp-action="Index" class="btn btn-secondary mt-5">Back to List</a>
+    </div>
+</div>

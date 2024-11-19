@@ -1,0 +1,79 @@
+﻿@model FinalProject.Models.Service
+
+@{
+    ViewData["Title"] = "Service Details";
+}
+
+<h1>Service Details</h1>
+
+<div>
+    <h4>Name</h4>
+    <p>@Model.Name</p>
+</div>
+<div>
+    <h4>Description</h4>
+    <p>@Model.Description</p>
+</div>
+<div>
+    <h4>Price</h4>
+	<p>@Model.Price</p>
+</div>
+@if (ViewContext.HttpContext.Session.GetString("UserRole") == "User"){
+    <a asp-controller="Orders" asp-action="Create" asp-route-serviceId="@Model.Id" asp-route-catagoryId="@Model.CategoryId" class="btn btn-primary"> Order </a>
+}
+@if (ViewContext.HttpContext.Session.GetString("UserId") == Model.ServiceProviderId)
+{
+    <form asp-action="Edit" asp-controller="Services" asp-route-id="@Model.Id" method="get" style="display:inline;">
+        <button type="submit" class="btn btn-warning">Edit</button>
+    </form>
+    <form asp-action="DeleteConfirmed" method="post" style="display:inline;">
+        <input type="hidden" asp-for="Id" value="@Model.Id" />
+        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this service?');">Delete</button>
+    </form>
+}
+
+<hr />
+@if (ViewContext.HttpContext.Session.GetString("UserRole") == "User")
+{
+<h3>Submit Feedback</h3>
+
+<form asp-action="SubmitFeedback" method="post">
+    <input type="hidden" name="ServiceId" value="@Model.Id" />
+    <textarea name="Content" class="form-control" placeholder="Write your feedback here..." required></textarea>
+    <br />
+
+    <h4>Rate the service:</h4>
+    <div>
+        @for (int i = 1; i <= 5; i++)
+        {
+            <label>
+                <input type="radio" name="Rating" value="@i" required />
+                @i
+            </label>
+        }
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Submit Feedback</button>
+</form>
+}
+<hr />
+
+<h3>Existing Feedback</h3>
+<ul>
+    @if (Model.Feedbacks != null && Model.Feedbacks.Any())
+    {
+        foreach (var feedback in Model.Feedbacks)
+        {
+            <li>
+                @feedback.Content - <strong>@feedback.User.UserName</strong>
+                <br />
+                Rating: @feedback.Rating / 5
+                <br />
+            </li>
+        }
+    }
+    else
+    {
+        <li>No feedback available for this service.</li>
+    }
+</ul>

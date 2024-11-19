@@ -1,0 +1,28 @@
+﻿@model FinalProject.Dtos.FeedbackDto
+
+@{
+    ViewBag.Title = "Create Feedback";
+}
+
+<h1>Create Feedback</h1>
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label asp-for="Content"></label>
+        <textarea asp-for="Content" class="form-control" required></textarea>
+        <span asp-validation-for="Content" class="text-danger"></span>
+    </div>
+    <input type="hidden" asp-for="ServiceId" />
+    <input type="hidden" asp-for="UserId" />
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <a asp-action="Index" asp-route-serviceId="@Model.ServiceId" class="btn btn-secondary">Cancel</a>
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

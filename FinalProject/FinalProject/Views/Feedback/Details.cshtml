@@ -1,0 +1,22 @@
+﻿@model FinalProject.Models.Feedback
+
+@{
+    ViewBag.Title = "Feedback Details";
+    var service = ViewBag.ServiceName;
+}
+
+<h1>Feedback Details</h1>
+
+<div>
+    <h4>Content</h4>
+    <p>@Model.Content</p>
+
+    <h4>Service</h4>
+    <p>@service</p>
+
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
+        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
+        <a asp-action="Index" asp-route-serviceId="@Model.ServiceId" class="btn btn-secondary">Back to List</a>
+    </div>
+</div>

@@ -1,0 +1,31 @@
+﻿@model IEnumerable<FinalProject.Models.Category>
+
+    @{
+    ViewData["Title"] = "Categories";
+    }
+
+    <div class="Services py-5 text-center" id="ser">
+        <div class="text py-5">
+            <h1>Our <span>Categories</span></h1>
+        </div>
+        <div class="container">
+            <div class="row">
+                @foreach (var category in Model)
+            {
+                <div class="col-lg-4 col-md-6">
+                    <div class="card" style="width: 18rem;">
+                        <img src="C:\Users\fatma\OneDrive\Desktop\Servies\Servies\images\ac_12810015.png@category.Image" alt="@category.Name" class="card-img-top" />
+                        <div class="card-body">
+                            <h2 class="card-title text-capitalize">@category.Name</h2>
+                            <p class="card-text text-capitalize">@category.Description</p>
+                            <a asp-action="Details" asp-route-id="@category.Id" class="btn text-capitalize">view details</a>
+                            <a asp-action="Edit" asp-route-id="@category.Id" class="btn text-capitalize">edit</a>
+                            <a asp-action="Delete" asp-route-id="@category.Id" class="btn text-capitalize">delete</a>
+                        </div>
+                    </div>
+                </div>
+            }
+            </div>
+            <a asp-action="Create" class="btn btn-primary mt-5">Add New Category</a>
+        </div>
+    </div>

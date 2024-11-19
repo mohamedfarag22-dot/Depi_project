@@ -1,0 +1,26 @@
+﻿@model FinalProject.Models.Category
+
+@{
+    ViewData["Title"] = "Create Category";
+}
+
+<div class="container py-5">
+    <div class="text-center py-5">
+        <h1>Create a <span>Category</span></h1>
+    </div>
+
+    <form asp-action="Create" method="post">
+        <div class="form-group mb-4">
+            <label asp-for="Name" class="control-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="form-group mb-4">
+            <label asp-for="Description" class="control-label"></label>
+            <textarea asp-for="Description" class="form-control"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Create</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>

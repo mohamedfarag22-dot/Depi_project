@@ -1,0 +1,27 @@
+﻿@model FinalProject.Models.Order
+
+@{
+    ViewData["Title"] = "Order Details";
+}
+
+<h1>Order Details</h1>
+
+<div>
+    <h4>Service Name</h4>
+    <p>@ViewBag.ServiceName</p> 
+</div>
+<div>
+    <h4>Address</h4>
+    <p>@Model.Address</p>
+</div>
+<div>
+    <h4>Available From</h4>
+    <p>@Model.AvailableFrom</p>
+</div>
+<div>
+    <h4>Available To</h4>
+    <p>@Model.AvailableTo</p>
+</div>
+
+<a asp-action="Index" asp-controller="Orders" asp-route-categoryId="@ViewBag.CategoryId" class="btn btn-secondary">Back to Orders List</a>
+

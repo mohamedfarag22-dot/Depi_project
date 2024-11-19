@@ -1,0 +1,32 @@
+﻿@model IEnumerable<FinalProject.Models.Feedback>
+
+@{
+    ViewBag.Title = "Feedback List";
+    var serviceId = ViewData["ServiceId"];
+}
+
+<h1>Feedback for Service ID: @serviceId</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Content</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var feedback in Model)
+        {
+            <tr>
+                <td>@feedback.Content</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@feedback.Id">View</a> |
+                    <a asp-action="Edit" asp-route-id="@feedback.Id">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@feedback.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Create" asp-route-serviceId="@serviceId" class="btn btn-primary">Add Feedback</a>
